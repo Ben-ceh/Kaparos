@@ -13,7 +13,8 @@ namespace Kaparos
         static Random rnd = new Random();
         static int nyitasomOsszesenEddig = 0;
         static int[] jegyekArai = {300, 500, 800, 1000};
-        static int jegyeimOssz = 4;
+        static bool segelyElerhetoE = true;
+
 
         static int jegyMennyiseg = 0;
         static int jegy = 0;
@@ -62,8 +63,57 @@ namespace Kaparos
 
             goto Szerencsejáték;
 
-            Szerencsejáték:
 
+        Szerencsejáték:
+            Console.Clear();
+            if (egyenlegem < 301 && segelyElerhetoE == false)
+            {
+                var vonal4 = $"---------------------------------------------------------";
+                Console.SetCursorPosition((Console.WindowWidth - vonal4.Length) / 2, Console.CursorTop);
+                Console.WriteLine(vonal4);
+                var segelySzoveg4 = $"Az egyenlegedről az összeg elfogyott megint. A játékot pénz nélkül nem folytathatod. :(";
+                Console.SetCursorPosition((Console.WindowWidth - segelySzoveg4.Length) / 2, Console.CursorTop);
+                Console.WriteLine(segelySzoveg4);
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+            if (egyenlegem < 301 && segelyElerhetoE == true)
+            {
+                var vonal4 = $"---------------------------------------------------------";
+                Console.SetCursorPosition((Console.WindowWidth - vonal4.Length) / 2, Console.CursorTop);
+                Console.WriteLine(vonal4);
+
+                var segelySzoveg = $"Sajnos nincs több fedezett az egyenlegeden, hogy tudd folytatni ezt a játékot!";
+                Console.SetCursorPosition((Console.WindowWidth - segelySzoveg.Length) / 2, Console.CursorTop);
+                Console.WriteLine(segelySzoveg);
+                Console.WriteLine();
+                var segelySzoveg2 = $"Felajánlunk egy egyszeri alkalmat. El szeretnéd adni a házadat 5000ft-ért? (igen/nem)";
+                Console.SetCursorPosition((Console.WindowWidth - segelySzoveg2.Length) / 2, Console.CursorTop);
+                Console.WriteLine(segelySzoveg2);
+                string valasz3 = Console.ReadLine();
+                if (valasz3.ToLower() == "igen")
+                {
+                    var segelySzoveg3 = $"Rendben, az egyenleged sikeresen feltölve. További sok szerencsét!";
+                    Console.SetCursorPosition((Console.WindowWidth - segelySzoveg3.Length) / 2, Console.CursorTop);
+                    Console.WriteLine(segelySzoveg3);
+                    segelyElerhetoE = false;
+                    egyenlegem += 5000;
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                else
+                {
+                    var segelySzoveg4 = $"A játékot pénz nélkül nem folytathatod. :(";
+                    Console.SetCursorPosition((Console.WindowWidth - segelySzoveg4.Length) / 2, Console.CursorTop);
+                    Console.WriteLine(segelySzoveg4);
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                    Console.Clear();
+
+                }
+
+
+            }
             Console.WriteLine(@"                                                               
                                                                                         88                                                              
                                                                                         88              ,d      ,d                                      
@@ -122,6 +172,8 @@ namespace Kaparos
                     Console.WriteLine(sikertelenKarakter);
                     Console.ReadKey();
                     Console.Clear();
+                    goto Szerencsejáték;
+                    
                 }
                 
                 jegy = jegyeimOsszesen;
@@ -223,7 +275,8 @@ namespace Kaparos
 
             Console.Clear();
             goto Szerencsejáték;
-           
+            
+
         }
 
         public static void jegyNyitasJatek(int Ticket,int TicketMennyiseg)
@@ -245,19 +298,19 @@ namespace Kaparos
                     Console.WriteLine(db);
                     Console.WriteLine();
                     Console.WriteLine(@"
-                                                ██████████
-                                                ██▒▒▒▒▒▒██
-                                                ██▒░░░░▒██
-                                                ██▒░▓▓░▒██
-                                                ██▒░▓▓░▒██
-                                                ██▒░░░░▒██
-                                                ██▒▒▒▒▒▒██
-                                                ██▒▒░▒▒▒██
-                                                ██████████
+                                                                                                                ██████████
+                                                                                                                ██▒▒▒▒▒▒██
+                                                                                                                ██▒░░░░▒██
+                                                                                                                ██▒░▓▓░▒██
+                                                                                                                ██▒░▓▓░▒██
+                                                                                                                ██▒░░░░▒██
+                                                                                                                ██▒▒▒▒▒▒██
+                                                                                                                ██▒▒░▒▒▒██
+                                                                                                                ██████████
                                                     
 ");
-                    int szamom = rnd.Next(1, 31);
-                    if (szamom<16)
+                    int szamom = rnd.Next(1, 11);
+                    if (szamom < 6)
                     {
                         var sikeresKaparas = $"Gratulálok nyertél: {nyeremeny}ft.";
                         Console.SetCursorPosition((Console.WindowWidth - sikeresKaparas.Length) / 2, Console.CursorTop);
@@ -292,19 +345,19 @@ namespace Kaparos
                     Console.WriteLine(db);
                     Console.WriteLine();
                     Console.WriteLine(@"
-                                                ██████████
-                                                ██▒▒▒▒▒▒██
-                                                ██▒░░░░▒██
-                                                ██▒░▓▓░▒██
-                                                ██▒░▓▓░▒██
-                                                ██▒░░░░▒██
-                                                ██▒▒▒▒▒▒██
-                                                ██▒▒░▒▒▒██
-                                                ██████████
+                                                                                                                ██████████
+                                                                                                                ██▒▒▒▒▒▒██
+                                                                                                                ██▒░░░░▒██
+                                                                                                                ██▒░▓▓░▒██
+                                                                                                                ██▒░▓▓░▒██
+                                                                                                                ██▒░░░░▒██
+                                                                                                                ██▒▒▒▒▒▒██
+                                                                                                                ██▒▒░▒▒▒██
+                                                                                                                ██████████
                                                     
 ");
-                    int szamom = rnd.Next(1, 31);
-                    if (szamom < 16)
+                    int szamom = rnd.Next(1, 11);
+                    if (szamom < 6)
                     {
                         var sikeresKaparas = $"Gratulálok nyertél: {nyeremeny}ft.";
                         Console.SetCursorPosition((Console.WindowWidth - sikeresKaparas.Length) / 2, Console.CursorTop);
@@ -338,19 +391,19 @@ namespace Kaparos
                     Console.WriteLine(db);
                     Console.WriteLine();
                     Console.WriteLine(@"
-                                                ██████████
-                                                ██▒▒▒▒▒▒██
-                                                ██▒░░░░▒██
-                                                ██▒░▓▓░▒██
-                                                ██▒░▓▓░▒██
-                                                ██▒░░░░▒██
-                                                ██▒▒▒▒▒▒██
-                                                ██▒▒░▒▒▒██
-                                                ██████████
+                                                                                                                ██████████
+                                                                                                                ██▒▒▒▒▒▒██
+                                                                                                                ██▒░░░░▒██
+                                                                                                                ██▒░▓▓░▒██
+                                                                                                                ██▒░▓▓░▒██
+                                                                                                                ██▒░░░░▒██
+                                                                                                                ██▒▒▒▒▒▒██
+                                                                                                                ██▒▒░▒▒▒██
+                                                                                                                ██████████
                                                     
 ");
-                    int szamom = rnd.Next(1, 31);
-                    if (szamom < 16)
+                    int szamom = rnd.Next(1, 11);
+                    if (szamom < 6)
                     {
                         var sikeresKaparas = $"Gratulálok nyertél: {nyeremeny}ft.";
                         Console.SetCursorPosition((Console.WindowWidth - sikeresKaparas.Length) / 2, Console.CursorTop);
@@ -384,19 +437,19 @@ namespace Kaparos
                     Console.WriteLine(db);
                     Console.WriteLine();
                     Console.WriteLine(@"
-                                                ██████████
-                                                ██▒▒▒▒▒▒██
-                                                ██▒░░░░▒██
-                                                ██▒░▓▓░▒██
-                                                ██▒░▓▓░▒██
-                                                ██▒░░░░▒██
-                                                ██▒▒▒▒▒▒██
-                                                ██▒▒░▒▒▒██
-                                                ██████████
+                                                                                                                ██████████
+                                                                                                                ██▒▒▒▒▒▒██
+                                                                                                                ██▒░░░░▒██
+                                                                                                                ██▒░▓▓░▒██
+                                                                                                                ██▒░▓▓░▒██
+                                                                                                                ██▒░░░░▒██
+                                                                                                                ██▒▒▒▒▒▒██
+                                                                                                                ██▒▒░▒▒▒██
+                                                                                                                ██████████
                                                     
 ");
-                    int szamom = rnd.Next(1, 31);
-                    if (szamom < 16)
+                    int szamom = rnd.Next(1, 11);
+                    if (szamom < 6)
                     {
                         var sikeresKaparas = $"Gratulálok nyertél: {nyeremeny}ft.";
                         Console.SetCursorPosition((Console.WindowWidth - sikeresKaparas.Length) / 2, Console.CursorTop);
@@ -417,7 +470,7 @@ namespace Kaparos
                     }
                 }
             }
-
+            
         }
 
        
